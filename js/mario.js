@@ -68,7 +68,6 @@
             resourceCache[url] = false;
             // Use Base64 if available
             var src = (window.MARIO_ASSETS && window.MARIO_ASSETS[url]) ? window.MARIO_ASSETS[url] : url;
-            if (!window.MARIO_ASSETS) 
             img.src = src;
         }
     }
