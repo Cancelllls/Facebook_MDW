@@ -57,7 +57,8 @@
                 }
             };
             resourceCache[url] = false;
-            img.src = url;
+            // Use Base64 if available
+            img.src = (window.MARIO_ASSETS && window.MARIO_ASSETS[url]) ? window.MARIO_ASSETS[url] : url;
         }
     }
 
@@ -2509,25 +2510,28 @@ var music;
 //initialize
 var lastTime;
 function init() {
+  var getSrc = function(url) {
+    return (window.MARIO_ASSETS && window.MARIO_ASSETS[url]) ? window.MARIO_ASSETS[url] : url;
+  };
   music = {
-    overworld: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/aboveground_bgm.ogg'),
-    underground: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/underground_bgm.ogg'),
-    clear: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/stage_clear.wav'),
-    death: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/mariodie.wav')
+    overworld: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/aboveground_bgm.ogg')),
+    underground: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/underground_bgm.ogg')),
+    clear: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/stage_clear.wav')),
+    death: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/mariodie.wav'))
   };
   sounds = {
-    smallJump: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/jump-small.wav'),
-    bigJump: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/jump-super.wav'),
-    breakBlock: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/breakblock.wav'),
-    bump: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/bump.wav'),
-    coin: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/coin.wav'),
-    fireball: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/fireball.wav'),
-    flagpole: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/flagpole.wav'),
-    kick: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/kick.wav'),
-    pipe: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/pipe.wav'),
-    itemAppear: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/itemAppear.wav'),
-    powerup: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/powerup.wav'),
-    stomp: new Audio('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/stomp.wav')
+    smallJump: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/jump-small.wav')),
+    bigJump: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/jump-super.wav')),
+    breakBlock: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/breakblock.wav')),
+    bump: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/bump.wav')),
+    coin: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/coin.wav')),
+    fireball: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/fireball.wav')),
+    flagpole: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/flagpole.wav')),
+    kick: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/kick.wav')),
+    pipe: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/pipe.wav')),
+    itemAppear: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/itemAppear.wav')),
+    powerup: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/powerup.wav')),
+    stomp: new Audio(getSrc('https://raw.githubusercontent.com/reruns/mario/gh-pages/sounds/stomp.wav'))
   };
   Mario.oneone();
   lastTime = Date.now();
